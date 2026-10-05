@@ -85,8 +85,8 @@ class FaithfulnessChecker:
         context_text = " ".join([chunk.get("text", "") for chunk in context_chunks])
 
         # Score each claim by the share of its content words found in the context
-        ratios = [self._support_ratio(claim, context_text) for claim in claims]
-        ratios = [r for r in ratios if r is not None]
+        claim_ratios = [self._support_ratio(claim, context_text) for claim in claims]
+        ratios = [r for r in claim_ratios if r is not None]
         if not ratios:
             logger.info("faithfulness_no_content_claims")
             return 0.5  # Same neutral default as when no claims are extracted
